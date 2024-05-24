@@ -19,7 +19,7 @@ import { db } from '@/configs';
 import moment from 'moment/moment';
 import { JsonForms } from '@/configs/schema';
 import { Route } from 'lucide-react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 const PROMPT=",On Basis of description create JSON form with formTitle, formHeading along with fieldName, FieldTitle,FieldType, Placeholder, label , required fields, and checkbox and select field type options will be in array only and in JSON format"
 const CreateForm = () => {
     const{user} = useUser();
@@ -39,7 +39,7 @@ const CreateForm = () => {
                 createdAt:moment().format('DD/MM/yyyy')}).returning({id:JsonForms.id});
 
                 if(resp[0].id){
-                    route.push('/edit-form/'+resp[0].id);
+                    router.push('/edit-form/'+resp[0].id);
                 }
             console.log("Form created successfully");
             setLoading(false);
